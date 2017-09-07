@@ -97,11 +97,6 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="#">
-                                    <i class="fa fa-gear"></i>
-                                </a>
-                            </li>
-                            <li>
                                 <a href="${url}logout">
                                     <i class="fa fa-sign-out"></i>
                                 </a>

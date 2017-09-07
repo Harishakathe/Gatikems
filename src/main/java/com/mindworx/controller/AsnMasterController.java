@@ -30,6 +30,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mindworx.model.AsnMaster;
 import com.mindworx.model.ConsigneeMaster;
+import com.mindworx.model.CustomOption;
 import com.mindworx.model.IntfstgInbpo;
 import com.mindworx.model.PoHead;
 import com.mindworx.model.SoHead;
@@ -57,6 +58,8 @@ public class AsnMasterController {
 	public ModelAndView soForm() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("asn-form");
+		List<CustomOption> sku_list = intfstgInbpoService.getSkuByCompId("GKW0000006");
+		modelAndView.addObject("sku_list", sku_list);
 		return modelAndView;
 	}
 	
@@ -82,7 +85,8 @@ public class AsnMasterController {
 			redirectAttributes.addFlashAttribute("success", "false");
 		}else{			
 			intfstgInbpoService.create(poHead);
-			redirectAttributes.addFlashAttribute("success", "true");			
+			redirectAttributes.addFlashAttribute("success", "true");
+			redirectAttributes.addFlashAttribute("massage", "ASN/Invoice No:<b>"+poHead.getPoNo()+"</b> is Generated Successfully.");
 		}
 		return "redirect:asn-master";
 	}

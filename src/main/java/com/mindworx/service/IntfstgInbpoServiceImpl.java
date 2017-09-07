@@ -8,9 +8,11 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Service;
 
+import com.mindworx.dao.CustomOptionDao;
 import com.mindworx.dao.IntfstgInbpoDao;
 import com.mindworx.dao.SupplierMasterDao;
 import com.mindworx.model.AsnTrackingRequest;
+import com.mindworx.model.CustomOption;
 import com.mindworx.model.IntfstgInbpo;
 import com.mindworx.model.IntfstgInbso;
 import com.mindworx.model.PoHead;
@@ -23,6 +25,8 @@ public class IntfstgInbpoServiceImpl implements IntfstgInbpoService{
 	private IntfstgInbpoDao intfstgInbpoDao;
 	@Autowired
 	private SupplierMasterDao supplierMasterDao;
+	@Autowired	
+	private CustomOptionDao customOptionDao;
 
 	@Override
 	public List<IntfstgInbpo> getAll() {
@@ -130,6 +134,11 @@ public class IntfstgInbpoServiceImpl implements IntfstgInbpoService{
 	@Override
 	public List<PoHead> getPoNoList(Date fromDate, Date toDate) {
 		return intfstgInbpoDao.getPoNoList(fromDate,toDate);
+	}
+
+	@Override
+	public List<CustomOption> getSkuByCompId(String compId) {
+		return customOptionDao.getSkuByCompId(compId);
 	}
 
 	

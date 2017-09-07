@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mindworx.dao.ConsigneeMasterDao;
+import com.mindworx.dao.CustomOptionDao;
 import com.mindworx.dao.IntfstgInbsoDao;
 import com.mindworx.model.ConsigneeMaster;
+import com.mindworx.model.CustomOption;
 import com.mindworx.model.IntfstgInbso;
 import com.mindworx.model.SoHead;
 
@@ -22,6 +24,8 @@ public class IntfstgInbsoServiceImpl implements IntfstgInbsoService{
 	private IntfstgInbsoDao intfstgInbsoDao;
 	@Autowired	
 	private ConsigneeMasterDao consigneeMasterDao;
+	@Autowired	
+	private CustomOptionDao customOptionDao;
 
 	@Override
 	public List<IntfstgInbso> getAll() {
@@ -62,6 +66,16 @@ public class IntfstgInbsoServiceImpl implements IntfstgInbsoService{
 	@Override
 	public List<SoHead> getSoNoList(Date fromDate, Date toDate) {
 		return intfstgInbsoDao.getSoNoList(fromDate, toDate);
+	}
+
+	@Override
+	public List<CustomOption> getSkuByCompId(String CompId) {
+		return customOptionDao.getSkuByCompId(CompId);
+	}
+
+	@Override
+	public List<CustomOption> getUomByCompId(String CompId) {
+		return customOptionDao.getUomByCompId(CompId);
 	}
 
 }

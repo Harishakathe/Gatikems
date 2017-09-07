@@ -393,11 +393,8 @@
 						<span>{0}</span><input type="hidden" class="form-control input-sm num"  name="lines[{1}].ordlineNo" value="{0}"></td>
 					<td>
 						<div class="form-group no-margins">
-							<select class="form-control input-sm" name="lines[{1}].sku">
-								<option value="option 1">option 1</option>
-								<option value="option 2">option 2</option>
-								<option value="option 3">option 3</option>
-								<option value="option 4">option 4</option>
+							<select class="form-control input-sm sku_select2" name="lines[{1}].sku">
+															
 							</select>
 						</div>
 					</td>
@@ -603,7 +600,8 @@
             $(document).ready(function() {
             	swal({
 	                    title: "Submitted Successfully",
-	                    text: "Your information has been submitted successfully."
+	                    text: "${massage}",
+	                    html: true
 	                });
 	            /*setTimeout(function() {
 		            toastr.options = {
@@ -621,7 +619,7 @@
          var serverContext = "${url}";
          $(document).ready(function() {
         	 
-        	 
+			 
         	 
          	$('#consigneeId').select2({
 		         placeholder : "Search for an Item",
@@ -759,6 +757,7 @@
 						$(this).rules('add', { required: true });
 					}
          	     });
+         	   $('.sku_select2').select2({data:sku_data});
          	}
          	$('#soLines tbody').on('click', '.addRow', function() {
          	        addRowInTable();
@@ -781,7 +780,14 @@
                   });
    	            $(tr).remove();
    	        });
+         	
+         	var sku_data = new Array();
+	       	 <c:forEach var="obj" items="${sku_list}" varStatus="status">
+	       		sku_data.push({id:'${obj.id}',text:'${obj.text}'});   
+	         </c:forEach>
          	addRowInTable();
+         	
+         	
          	var find_so = $('#find_so').ladda();
          	find_so.click(function(e) {
          		   var so_no = $('#so_no').val();
@@ -989,6 +995,7 @@
          	    $("#mySoListModalLabel").modal('hide');
          	    $('#so_no').val($('#selectSoNo').val());
          	});
+         	
          });
       </script>
    </body>

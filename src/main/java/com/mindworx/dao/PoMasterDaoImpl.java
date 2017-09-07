@@ -229,7 +229,7 @@ public class PoMasterDaoImpl implements PoMasterDao{
 		try {
 			//String sql = "SELECT * FROM GEMSPROD.GEMS_GKE_DOCKET_UPLOAD WHERE DOCKET_NO =125602795";
 			//String sql = "SELECT * FROM GEMSPROD.GEMS_MOBILE_LOGIN WHERE STATUS ='V'";
-			String sql = "SELECT * FROM "+name;
+			String sql = "SELECT * FROM VIEW_SITEWISE_INVTSUMMARY WHERE COMP_ID ='GKW0000006'";
 			connection = oracelDbSource.getConnection();
 			Statement st = connection.createStatement();
 			ResultSet rs = st.executeQuery(sql);

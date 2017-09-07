@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.mindworx.model.AsnTrackingRequest;
+import com.mindworx.model.CustomOption;
 import com.mindworx.model.IntfstgInbpo;
 import com.mindworx.model.PoHead;
 import com.mindworx.model.SupplierMaster;
@@ -31,6 +32,7 @@ public interface IntfstgInbpoService {
 	
 	public List<SupplierMaster> getSupplierList(String like);
 	public List<PoHead> getPoNoList(Date fromDate, Date toDate);
+	public List<CustomOption> getSkuByCompId(String string);
 	
 	
 	

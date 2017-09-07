@@ -28,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mindworx.model.ConsigneeMaster;
+import com.mindworx.model.CustomOption;
 import com.mindworx.model.IntfstgInbso;
 import com.mindworx.model.PoHead;
 import com.mindworx.model.SoHead;
@@ -51,6 +52,10 @@ public class SoMasterController {
 	public ModelAndView soForm() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("so-form");
+		List<CustomOption> sku_list = intfstgInbsoService.getSkuByCompId("GKW0000006");
+		modelAndView.addObject("sku_list", sku_list);
+		List<CustomOption> uom_list = intfstgInbsoService.getUomByCompId("GKW0000006");
+		modelAndView.addObject("uom_list", uom_list);
 		return modelAndView;
 	}
 	
@@ -73,7 +78,8 @@ public class SoMasterController {
 			redirectAttributes.addFlashAttribute("success", "false");			
 		}else{
 			intfstgInbsoService.create(soHead);
-			redirectAttributes.addFlashAttribute("success", "true");			
+			redirectAttributes.addFlashAttribute("success", "true");
+			redirectAttributes.addFlashAttribute("massage", "Order No:<b>"+soHead.getOrdNo()+"</b> is Generated Successfully.");
 		}
 		return "redirect:so-master";
 	}
@@ -106,6 +112,17 @@ public class SoMasterController {
 			return new ResponseEntity<List<SoHead>>(list, HttpStatus.OK);
 		}
     	return new ResponseEntity<List<SoHead>>(HttpStatus.BAD_REQUEST);
+    }
+	
+	@RequestMapping(value = "/getSkuList", method = RequestMethod.GET)
+	public ResponseEntity<List<CustomOption>> getSkuList(){
+		
+		List<CustomOption> list = intfstgInbsoService.getSkuByCompId("GKW0000006");
+		
+		if(list!=null){
+			return new ResponseEntity<List<CustomOption>>(list, HttpStatus.OK);
+		}
+    	return new ResponseEntity<List<CustomOption>>(HttpStatus.BAD_REQUEST);
     }
 		
 }
